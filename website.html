@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cab Rates</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        select, button {
+            padding: 10px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Find Cab Rate</h1>
+    <div>
+        <label for="location">Location: </label>
+        <select id="location">
+            <option value="SXR/SXR">SXR/SXR</option>
+            <option value="JAM/JAM">JAM/JAM</option>
+        </select>
+
+        <label for="cabType">Cab Type: </label>
+        <select id="cabType">
+            <option value="Etios / Dezire">Etios / Dezire</option>
+            <option value="Innova">Innova</option>
+            <option value="14 Tempo">14 Tempo</option>
+            <option value="17 Tempo">17 Tempo</option>
+        </select>
+
+        <label for="acType">AC/Non-AC: </label>
+        <select id="acType">
+            <option value="AC">AC</option>
+            <option value="Non-AC">Non-AC</option>
+        </select>
+
+        <button onclick="findRate()">Find Rate</button>
+    </div>
+    <div id="rateDisplay" style="margin-top: 20px; font-size: 18px;"></div>
+
+    <table>
+        <tr>
+            <th>Location</th>
+            <th>Cab Type</th>
+            <th>AC/Non-AC</th>
+            <th>Rate</th>
+        </tr>
+        <tr>
+            <td>SXR/SXR</td>
+            <td>Etios / Dezire</td>
+            <td>AC</td>
+            <td>3500</td>
+        </tr>
+        <tr>
+            <td>SXR/SXR</td>
+            <td>Innova</td>
+            <td>AC</td>
+            <td>4200</td>
+        </tr>
+        <tr>
+            <td>SXR/SXR</td>
+            <td>14 Tempo</td>
+            <td>AC</td>
+            <td>5500</td>
+        </tr>
+        <tr>
+            <td>SXR/SXR</td>
+            <td>17 Tempo</td>
+            <td>AC</td>
+            <td>7000</td>
+        </tr>
+        <tr>
+            <td>SXR/SXR</td>
+            <td>Etios / Dezire</td>
+            <td>Non-AC</td>
+            <td>3300</td>
+        </tr>
+        <tr>
+            <td>JAM/JAM</td>
+            <td>Etios / Dezire</td>
+            <td>AC</td>
+            <td>4800</td>
+        </tr>
+        <tr>
+            <td>JAM/JAM</td>
+            <td>Innova</td>
+            <td>AC</td>
+            <td>5800</td>
+        </tr>
+        <tr>
+            <td>JAM/JAM</td>
+            <td>14 Tempo</td>
+            <td>AC</td>
+            <td>7500</td>
+        </tr>
+        <tr>
+            <td>JAM/JAM</td>
+            <td>17 Tempo</td>
+            <td>AC</td>
+            <td>9000</td>
+        </tr>
+        <tr>
+            <td>JAM/JAM</td>
+            <td>Etios / Dezire</td>
+            <td>Non-AC</td>
+            <td>4500</td>
+        </tr>
+        <tr>
+            <td>JAM/JAM</td>
+            <td>Innova</td>
+            <td>Non-AC</td>
+            <td>5500</td>
+        </tr>
+        <tr>
+            <td>JAM/JAM</td>
+            <td>14 Tempo</td>
+            <td>Non-AC</td>
+            <td>7000</td>
+        </tr>
+        <tr>
+            <td>JAM/JAM</td>
+            <td>17 Tempo</td>
+            <td>Non-AC</td>
+            <td>8500</td>
+        </tr>
+    </table>
+
+    <script>
+        function findRate() {
+            // Get the selected values
+            var location = document.getElementById("location").value;
+            var cabType = document.getElementById("cabType").value;
+            var acType = document.getElementById("acType").value;
+
+            // Table data
+            var rates = {
+                "SXR/SXR": {
+                    "Etios / Dezire": {"AC": 3500, "Non-AC": 3300},
+                    "Innova": {"AC": 4200, "Non-AC": 4000},
+                    "14 Tempo": {"AC": 5500, "Non-AC": 5000},
+                    "17 Tempo": {"AC": 7000, "Non-AC": 6500}
+                },
+                "JAM/JAM": {
+                    "Etios / Dezire": {"AC": 4800, "Non-AC": 4500},
+                    "Innova": {"AC": 5800, "Non-AC": 5500},
+                    "14 Tempo": {"AC": 7500, "Non-AC": 7000},
+                    "17 Tempo": {"AC": 9000, "Non-AC": 8500}
+                }
+            };
+
+            // Find the rate
+            var rate = rates[location][cabType][acType];
+
+            // Display the rate
+            document.getElementById("rateDisplay").innerText = `The rate for ${cabType} (${acType}) in ${location} is ₹${rate}`;
+        }
+    </script>
+</body>
+</html>
