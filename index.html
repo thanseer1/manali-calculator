@@ -1,323 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Package Cost Calculator</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome for icons -->
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
-        background-color: #f4f4f4;
-    }
-    .container {
-        max-width: 600px;
-        margin: auto;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    h2 {
-        text-align: center;
-        color: #333;
-    }
-    label {
-        display: block;
-        margin-bottom: 5px;
-        color: #555;
-    }
-    input[type="number"], select, input[type="text"] {
-        width: calc(100% - 22px);
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-    }
-    button {
-        width: 100%;
-        padding: 10px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-top: 10px;
-    }
-    button:hover {
-        background-color: #45a049;
-    }
-    #totalCost {
-        font-size: 18px;
-        margin-top: 20px;
-        color: #333;
-    }
-    .warning {
-        color: Red;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
-    #summary {
-        margin-top: 20px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        background-color: #f9f9f9;
-    }
-    #summary table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-    #summary th, #summary td {
-        padding: 8px;
-        border-bottom: 1px solid #ddd;
-        text-align: left;
-    }
-    #summary th {
-        background-color: #f2f2f2;
-    }
-    #pdfButton, #printButton {
-        margin-top: 10px;
-        background-color: #007bff;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Calculator Options</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333333;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <h2>Manali Package Cost Calculator</h2>
-    <form id="packageForm">
-        <label for="leadID">Lead ID:</label>
-        <input type="text" id="leadID" name="leadID" required><br>
-
-        <label for="Customer">Customer Name:</label>
-        <input type="text" id="Customer" name="Customer" required><br>
-
-        <label for="season">Season:</label>
-        <select id="season" name="season" required>
-            <option value="Before 15 April">Before 15 April</option>
-            <option value="After 15 April">After 15 April</option>
-        </select><br>
-        <label for="rooms">Number of Rooms:</label>
-        <input type="number" id="rooms" name="rooms" required><br>
-        <label for="extraAdult">Number of Extra Adults:</label>
-        <input type="number" id="extraAdult" name="extraAdult" required><br>
-        <label for="kids">Number of Kids:</label>
-        <input type="number" id="kids" name="kids" required><br>
-        <label for="nights">Number of Nights in Manali:</label>
-        <input type="number" id="nights" name="nights" required><br>
-        <label for="vehicleDays">Number of Days Vehicle Needed in Manali:</label>
-        <input type="number" id="vehicleDays" name="vehicleDays" required><br>
-
-        <label for="vehicle">Vehicle:</label>
-        <select id="vehicle" name="vehicle" required>
-            <option value="Etios">Etios</option>
-            <option value="Innova">Innova</option>
-            <option value="Traveler">Traveler</option>
-        </select><br>
-        <label for="volvoTicketsDelhi">Number of Volvo Tickets from Delhi to Manali:</label>
-        <input type="number" id="volvoTicketsDelhi" name="volvoTicketsDelhi" required><br>
-        <label for="volvoTicketsManali">Number of Volvo Tickets from Manali to Delhi:</label>
-        <input type="number" id="volvoTicketsManali" name="volvoTicketsManali" required><br>
-
-        <label for="delhiPickUp">Delhi Pick Up & Drop to Volvo Stand (YES/NO):</label>
-        <select id="delhiPickUp" name="delhiPickUp" required>
-            <option value="NO">NO</option>
-            <option value="YES">YES</option>
-        </select><br>
-        <label for="delhiDrop">Pick up from Kashmere gate or Majnukatila and drop to Delhi (YES/NO):</label>
-        <select id="delhiDrop" name="delhiDrop" required>
-            <option value="NO">NO</option>
-            <option value="YES">YES</option>
-        </select><br>
-        <label for="delhiSightseeing">Delhi Sightseeing (YES/NO):</label>
-        <select id="delhiSightseeing" name="delhiSightseeing" required>
-            <option value="NO">NO</option>
-            <option value="YES">YES</option>
-        </select><br>
-        <button type="button" onclick="calculateCost()">Calculate Cost</button>
-    </form>
-    <p id="warningMessage" class="warning"></p>
-    <p id="totalCost"></p>
-    <div id="summary"></div>
-    <button id="pdfButton" onclick="saveSummaryToPDF()"><i class="fas fa-file-pdf"></i> Save Summary to PDF</button>
-    <button id="printButton" onclick="printSummary()"><i class="fas fa-print"></i> Print Summary</button>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script> <!-- jspdf library -->
-<script>
-    function calculateCost() {
-        // Retrieve values from form inputs
-        const leadID = document.getElementById('leadID').value;
-        const customer = document.getElementById('Customer').value;
-        const season = document.getElementById('season').value;
-        const rooms = parseInt(document.getElementById('rooms').value);
-        const extraAdult = parseInt(document.getElementById('extraAdult').value);
-        const kids = parseInt(document.getElementById('kids').value);
-        const nights = parseInt(document.getElementById('nights').value);
-        const vehicle = document.getElementById('vehicle').value;
-        const vehicleDays = parseInt(document.getElementById('vehicleDays').value);
-        const volvoTicketsDelhi = parseInt(document.getElementById('volvoTicketsDelhi').value);
-        const volvoTicketsManali = parseInt(document.getElementById('volvoTicketsManali').value);
-        const delhiSightseeing = document.getElementById('delhiSightseeing').value;
-        const delhiPickUp = document.getElementById('delhiPickUp').value;
-        const delhiDrop = document.getElementById('delhiDrop').value;
-
-        // Display warning if the number of Volvo tickets is not provided
-        if (isNaN(volvoTicketsDelhi) || isNaN(volvoTicketsManali) || volvoTicketsDelhi === 0 || volvoTicketsManali === 0) {
-            document.getElementById('warningMessage').innerText = "Please enter the number of Volvo tickets from Delhi to Manali and Manali to Delhi.";
-            return; // Stop execution if Volvo ticket numbers are not provided
-        } else {
-            document.getElementById('warningMessage').innerText = ""; // Clear any previous warning message
-        }
-
-        // Calculate costs...
-        
-        // Cost factors
-        const roomCost = season === 'Before 15 April' ? 3000 : 5000;
-        const extraAdultCost = season === 'Before 15 April' ? 1000 : 1200;
-        const extraChildCost = 500;
-        const volvoCost = season === 'Before 15 April' ? 1200 : 1500;
-        const vehicleCosts = {
-            'Etios': season === 'Before 15 April' ? 2500 : 3000,
-            'Innova': season === 'Before 15 April' ? 3500 : 4000,
-            'Traveler': season === 'Before 15 April' ? 5000 : 6000
-        };
-        const sightseeingCost = delhiSightseeing === 'YES' ? 3000 : 0;
-        const pickUpCost = delhiPickUp === 'YES' ? 2000 : 0;
-        const dropCost = delhiDrop === 'YES' ? 2000 : 0;
-
-        // Calculate total cost
-        const totalRoomCost = rooms * roomCost * nights;
-        const totalExtraAdultCost = extraAdult * extraAdultCost * nights;
-        const totalExtraChildCost = kids * extraChildCost * nights;
-        const totalVolvoCost = (volvoTicketsDelhi + volvoTicketsManali) * volvoCost;
-        const totalVehicleCost = vehicleCosts[vehicle] * vehicleDays;
-        const totalSightseeingCost = sightseeingCost;
-        const totalPickUpCost = pickUpCost;
-        const totalDropCost = dropCost;
-
-        // Calculate subtotal
-        const subtotal = totalRoomCost + totalExtraAdultCost + totalExtraChildCost + totalVolvoCost + totalVehicleCost + totalSightseeingCost + totalPickUpCost + totalDropCost;
-
-        // Calculate grand total with 15% tax
-        const grandTotal = subtotal * 1.15;
-
-        // Display total cost
-        document.getElementById('totalCost').innerText = `Total Cost including profit and tax: Rs ${grandTotal.toFixed(2)}`;
-
-        // Display summary
-        const summaryTable = `
-            <h3>Summary:</h3>
-            <table>
-                <tr>
-                    <th>Lead ID</th>
-                    <td>${leadID}</td>
-                </tr>
-                <tr>
-                    <th>Customer Name</th>
-                    <td>${customer}</td>
-                </tr>
-                <tr>
-                    <th>Season</th>
-                    <td>${season}</td>
-                </tr>
-                <tr>
-                    <th>Number of Rooms</th>
-                    <td>${rooms}</td>
-                </tr>
-                <tr>
-                    <th>Number of Extra Adults</th>
-                    <td>${extraAdult}</td>
-                </tr>
-                <tr>
-                    <th>Number of Kids</th>
-                    <td>${kids}</td>
-                </tr>
-                <tr>
-                    <th>Number of Nights</th>
-                    <td>${nights}</td>
-                </tr>
-                <tr>
-                    <th>Number of Days Vehicle Needed in Manali</th>
-                    <td>${vehicleDays}</td>
-                </tr>
-                <tr>
-                    <th>Vehicle</th>
-                    <td>${vehicle}</td>
-                </tr>
-                <tr>
-                    <th>Number of Volvo Tickets from Delhi to Manali</th>
-                    <td>${volvoTicketsDelhi}</td>
-                </tr>
-                <tr>
-                    <th>Number of Volvo Tickets from Manali to Delhi</th>
-                    <td>${volvoTicketsManali}</td>
-                </tr>
-                <tr>
-                    <th>Delhi Pick Up & Drop to Volvo Stand</th>
-                    <td>${delhiPickUp}</td>
-                </tr>
-                <tr>
-                    <th>Pick up from Kashmere gate or Majnukatila and drop to Delhi</th>
-                    <td>${delhiDrop}</td>
-                </tr>
-                <tr>
-                    <th>Delhi Sightseeing</th>
-                    <td>${delhiSightseeing}</td>
-                </tr>
-            </table>
-            <p>Total Cost: Rs ${grandTotal.toFixed(2)}</p>
-        `;
-        document.getElementById('summary').innerHTML = summaryTable;
-    }
-
-    function saveSummaryToPDF() {
-        const summary = document.getElementById('summary').innerHTML;
-        const pdf = new jsPDF();
-        pdf.text(summary, 10, 10);
-        pdf.save('package_summary.pdf');
-    }
-
-    function printSummary() {
-        const summary = document.getElementById('summary').innerHTML;
-        const printWindow = window.open('', '_blank');
-        printWindow.document.open();
-        printWindow.document.write(`
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Package Summary</title>
-                <style>
-                    body {
-                        font-family: Arial, sans-serif;
-                        padding: 20px;
-                    }
-                    table {
-                        width: 100%;
-                        border-collapse: collapse;
-                    }
-                    th, td {
-                        padding: 8px;
-                        border-bottom: 1px solid #ddd;
-                        text-align: left;
-                    }
-                    th {
-                        background-color: #f2f2f2;
-                    }
-                </style>
-            </head>
-            <body>
-                ${summary}
-            </body>
-            </html>
-        `);
-        printWindow.document.close();
-        printWindow.print();
-    }
-</script>
+    <div class="container">
+        <h1>Welcome to the Travel Calculator</h1>
+        <p>Please select a calculator:</p>
+        <div class="button-container">
+            <a href="Manali final cost calculator.html" class="button">Manali Calculator</a>
+            <a href="website.html" class="button">Kashmir Taxi Calculator</a>
+        </div>
+    </div>
 </body>
 </html>
-
